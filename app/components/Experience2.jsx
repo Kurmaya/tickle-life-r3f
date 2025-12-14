@@ -13,14 +13,14 @@ import { BlendFunction, Resizer, KernelSize,GlitchMode } from "postprocessing";
 import gsap  from "gsap";
 import HeartFac from "./HeartFac";
 
-import FuturisticRing from "./FutureRing";
+import FuturisticRing2 from "./FutureRing2";
 
 import { ShaderPass } from "three/examples/jsm/Addons.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { Pencil } from "./Pencil";
 import WaveShape2 from "./WaveShape2";
 
-export const Experience2 = ({ triggerExplosion, active, onHeartClick }) => {
+export const Experience2 = ({triggerExplosion,active,...props}) => {
   const [trigger, setTrigger] = useState(false);
   const { scene, camera } = useThree();
 
@@ -55,16 +55,16 @@ export const Experience2 = ({ triggerExplosion, active, onHeartClick }) => {
     return () => tl.kill();
   }, [camera]);
 //hide calculator
-document.querySelector('.form').classList.remove('active');
-document.querySelector('#scroll').style.color='black';
+// document.querySelector('.form').classList.remove('active');
+// document.querySelector('#scroll').style.color='black';
   // hide initial DOM elements
-  const list = ['heading1', 'heading2', 'rates'];
-  useEffect(() => {
-    list.forEach(i => {
-      const el = document.getElementById(i);
-      if (el) el.style.visibility = 'hidden';
-    });
-  }, []);
+  // const list = ['heading1', 'heading2', 'rates'];
+  // useEffect(() => {
+  //   list.forEach(i => {
+  //     const el = document.getElementById(i);
+  //     if (el) el.style.visibility = 'hidden';
+  //   });
+  // }, []);
 
   // listen to mouse movement
   useEffect(() => {
@@ -105,7 +105,7 @@ console.log('fluidRef:', fluidRef.current);
       <Float floatIntensity={0.5} rotationIntensity={0.25}>
         <HeartFac active={active} />
       </Float>
-      <FuturisticRing position={[0,-8.68,0]} glowIntensity={0.1} color={'#D7B750'} haloSpread={0} rippleCount={0.02} rippleSpeed={active ? 0.1 : 0.5} />
+      <FuturisticRing2 position={[0,-8.68,0]} glowIntensity={0.1} color={'#D7B750'} haloSpread={0} rippleCount={0.02} rippleSpeed={active ? 0.1 : 0.5} />
       <spotLight ref={spot} color={'yellow'} position={[4,22,8]} intensity={50} angle={0.6} decay={1.2} distance={18} penumbra={0.7} />
       <spotLight ref={spot} color={'yellow'} position={[4,22,-5]} intensity={50} angle={0.4} decay={1.2} distance={18} penumbra={0.7} />
       <ambientLight intensity={3} />

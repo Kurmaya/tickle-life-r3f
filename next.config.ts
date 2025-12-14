@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     })
     return config
   },
-  transpilePackages: ['three','@whatisjery/react-fluid-distortion'],
+  transpilePackages: ['@whatisjery/react-fluid-distortion'],
 };
 
 export default nextConfig;

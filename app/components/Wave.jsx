@@ -1,5 +1,5 @@
 import React, { useMemo, useRef } from "react";
-import { Line } from "@react-three/drei";
+import { Line, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -7,12 +7,11 @@ export default function WaveShape({
   color = "black",
   thickness = 0.06,
   animate = true,
-  triggerExplosion = false,
-  trigger=false,
   ...props
 }) {
   const lineRef = useRef();
   const fadeRef = useRef(0); // 0 = visible, 1 = fully black
+  const scroll = useScroll();
 
   // Curve points
   const curve = useMemo(() => {
@@ -35,12 +34,9 @@ export default function WaveShape({
   useFrame(({ clock }) => {
     if (!lineRef.current) return;
 
-    // ⭐ Fade value update
-    fadeRef.current = THREE.MathUtils.lerp(
-      fadeRef.current,
-      (triggerExplosion || trigger) ? 1 : 0,
-      0.1
-    );
+    // ⭐ Fade value driven by scroll
+    const targetFade = THREE.MathUtils.clamp((scroll.offset - 0.2) *5.0, 0, 1);
+    fadeRef.current = THREE.MathUtils.lerp(fadeRef.current, targetFade, 0.1);
 
     // ⭐ Blend original color toward black
     const finalColor = baseColor.clone().lerp(black, fadeRef.current);

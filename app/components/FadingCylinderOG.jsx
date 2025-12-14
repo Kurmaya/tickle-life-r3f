@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import React, { useMemo, useRef } from 'react'
-import { useScroll, useTexture } from '@react-three/drei'
+import { useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 
 const CurvedPlaneShader = {
@@ -55,7 +55,7 @@ const CurvedPlane = ({
   fadeDuration = 0.8,
   ...props
 }) => {
-  const scroller = useScroll();
+  
   const fadeYStart = useRef(1.0);
   const texture = useTexture(textureUrl);
   const materialRef = useRef();
@@ -102,7 +102,7 @@ const CurvedPlane = ({
   useFrame((_, delta) => {
     if (!materialRef.current) return;
 
-    const target =1.0-scroller.offset;
+    const target = (triggerExplosion || trigger) ? 0.0 : 1.0;
     const smoothing = 1 - Math.exp(-delta / fadeDuration);
 
     fadeYStart.current += (target - fadeYStart.current) * smoothing;

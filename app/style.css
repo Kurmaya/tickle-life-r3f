@@ -8,6 +8,10 @@ html,body,#root{
     /* font-family:  "Bebas Neue", sans-serif; */
  
 }
+
+/* Main{
+  cursor: none;
+} */
 #page{
   position: absolute;
   width: 100%;
@@ -62,13 +66,6 @@ p{
     left:5%;
 }
 
-.loading{
-    display: grid;
-    height: 100%;
-    width: 100%;
-    place-items:center;
-    display: none;
-}
 
 .row{
     display: flex;
@@ -121,7 +118,28 @@ p{
     /* height: 20px; */
     border-radius: 5px;
 }
-
+input[type='range'],.futuristic-tablet input[type='range']{
+  transition: 0.3s ease!important;
+  accent-color: #74ABAC!important;
+}
+.lbl label{
+  /* color: red!important; */
+  color:#00eaff!important;
+}
+.lbl:hover input[type='range']{
+  animation: glow3 1.5s ease infinite alternate;
+}
+.lbl:hover > input[type='range']{
+  accent-color: #26f4ff!important;
+  color:red!important;
+}
+input[type='range']:hover{
+  color:red;
+}
+.form select:hover{
+  animation: glow2 1.5s ease infinite alternate;
+  border-bottom: 4px solid #D7B750 !important;
+}
 /* 
 .form button{
     width: 85%;
@@ -132,13 +150,14 @@ p{
   width: 90%;
   padding: 8px;
   background: rgba(0, 20, 22, 0.7);
-  border: 1px solid #00f2ff66;
+  border: 1px solid #00f2ff;
   border-radius: 8px;
   color: #ccffff;
   font-size: 14px;
   outline: none;
   transition: 0.2s;
   box-shadow: 0 0 8px #00f2ff33 inset;
+  
 }
 
 .futuristic-tablet input::placeholder {
@@ -149,8 +168,15 @@ p{
   background: rgba(0, 30, 32, 0.9);
   border-color: #00eaff;
   box-shadow: 0 0 15px #00eaffaa, 0 0 6px #00f2ff inset;
+  accent-color: #00f2ff!important;
 }
+.futuristic-tablet input[type='range']:hover {
+border-color: #bfff00!important;
+background: rgba(0, 30, 32, 0.9);
+box-shadow: 0 0 15px #00eaffaa, 0 0 6px #00f2ff inset;
+cursor:pointer;
 
+}
 /* 🔹 Button */
 .f-button {
   padding: 10px;
@@ -174,7 +200,119 @@ p{
 .f-button:active {
   transform: translateY(1px);
 }
+.coin-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+    transform: translate(-50%, -50%);
+}
+
+.coin {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  transform-style: preserve-3d;
+  
+}
+
+.face {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: radial-gradient(circle at top, #D7B750, #b8860b);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: #2b2100;
+  font-size: 14px;
+  backface-visibility: hidden;
+  animation: glow 1.5s ease infinite alternate;
+}
+
+.face.front {
+  transform: translateZ(4px);
+}
+
+.face.back {
+  transform: rotateY(180deg) translateZ(4px);
+}
+
+.edge {
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: linear-gradient(
+    to right,
+    #7a5c00,
+    #d4af37,
+    #7a5c00
+  );
+  transform: rotateY(180deg);
+  
+}
+
+
+/* idle slow spin */
+@keyframes idleSpin {
+  from {
+    transform: rotateY(0deg) rotateX(10deg);
+  }
+  to {
+    transform: rotateY(360deg) rotateX(10deg);
+  }
+}
+
+/* fast hover spin */
+@keyframes hoverSpin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+
 /* --- FUTURISTIC ANIMATIONS --- */
+@keyframes glow{
+  0%{
+    box-shadow:
+    0 0 5px #D7B750,
+    0 0 15px #D7B750;
+  }
+  100%{
+    box-shadow:
+    0 0 10px #D7B750,
+    0 0 25px #D7B750;
+  }
+}
+@keyframes glow2{
+  0%{
+    box-shadow:
+    0 0 5px #3F9396,
+    0 0 15px #74ABAC ;
+  }
+  100%{
+    box-shadow:
+    0 0 10px #07686F ,
+    0 0 25px #07686F ;
+  }
+}
+@keyframes glow3{
+  0%{
+    box-shadow:
+    0 0 5px #3F9396,
+    0 0 15px #74ABAC ;
+  }
+  100%{
+    box-shadow:
+    0 0 10px #D7B750 ,
+    0 0 25px #D7B750 ;
+  }
+}
 
 /* scanline movement */
 @keyframes scanlines-move {
@@ -304,41 +442,6 @@ nav{
   right:15px;
 }
 
-.loader-wrapper {
-  position: fixed;
-  inset: 0;
-  background: white;
-  color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  
-  transition: opacity 0.7s ease-in-out, visibility 0.7s ease-in-out;
-  opacity: 1;
-  visibility: visible;
-}
-
-.loader-wrapper.fade-out {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.loader-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.spinner {
-  margin-top: 12px;
-  width: 40px;
-  height: 40px;
-  border: 4px solid #444;
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 0.9s linear infinite;
-}
 
 @keyframes spin {
   to {
@@ -372,6 +475,12 @@ nav{
 }
 /* ---- Mobile Layout (< 768px) ---- */
 @media (max-width: 769px) {
+  .coin-cursor{
+    display: none!important;
+  }
+  .form{
+    height: auto!important;
+  }
   #rates {
     top: 85% !important;
     left: 50% !important;
@@ -395,6 +504,9 @@ nav{
 
 /* ---- Very Small Phones (< 480px) ---- */
 @media (max-width: 480px) {
+  .coin-cursor{
+    display: none;
+  }
   .overlay{
     align-items: flex-end;
   }
@@ -436,7 +548,7 @@ nav{
   
   .form{
     width: 95%!important;
-    height: 55%!important;
+    height: auto!important;
   }
   .form p{
     margin-top: 5px;

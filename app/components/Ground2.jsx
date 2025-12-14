@@ -1,17 +1,18 @@
-import { MeshReflectorMaterial, useTexture } from "@react-three/drei";
+import { MeshReflectorMaterial, useScroll, useTexture } from "@react-three/drei";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { useEffect } from "react";
 import { ClampToEdgeWrapping, RepeatWrapping, SRGBColorSpace, TextureLoader } from "three";
 
 
 function Ground2({triggerExplosion,trigger,props}) {
+  const scroll = useScroll();
   return (
     <mesh
       rotation-x={-Math.PI / 2}
       castShadow
       receiveShadow
       position={[0, -8.7, 0]}
-      visible={(triggerExplosion || trigger)?false:true}
+      visible={(scroll.offset> 0.5)?false:true}
     >
       <planeGeometry args={[130, 130]} />
 
@@ -28,7 +29,7 @@ function Ground2({triggerExplosion,trigger,props}) {
         mixBlur={0.1}
 
         // Very high quality reflection, but without over-sampling
-        mirror={(triggerExplosion || trigger)?0.5:1}
+        mirror={(scroll.offset > 0.1)?0.5:1}
         mixStrength={1.5}
         mixContrast={1}
     color={(triggerExplosion || trigger)?'black':'gray'}

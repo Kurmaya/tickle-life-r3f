@@ -61,7 +61,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
           gap: "10px",
         }}
       >
-         <div style={{ width: "95%" }}>
+         <div className="lbl" style={{ width: "95%" }}>
     <label
       style={{
         color: "#00eaff",
@@ -74,7 +74,8 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
     </label>
 
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-      <input
+      <input 
+      autoFocus
         type="range"
         min="0"
         max="10000"
@@ -82,11 +83,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
         name="totalMonthlyIncome"
         value={formData.totalMonthlyIncome}
         onChange={handleInput}
-        style={{
-          flex: 1,
-          accentColor: "#00eaff",
-          cursor: "pointer",
-        }}
+        
       />
 
       <input
@@ -109,7 +106,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
       />
     </div>
   </div>
-    <div style={{ width: "95%" }}>
+    <div className="lbl" style={{ width: "95%" }}>
     <label
       style={{
         color: "#00eaff",
@@ -130,11 +127,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
         name="averageTicketSize"
         value={formData.averageTicketSize}
         onChange={handleInput}
-        style={{
-          flex: 1,
-          accentColor: "#00eaff",
-          cursor: "pointer",
-        }}
+        
       />
 
       <input
@@ -159,10 +152,10 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
   </div>
 
   {/* Monthly Volume */}
-  <div style={{ width: "95%" }}>
+  <div className="lbl" style={{ width: "95%" }}>
     <label
       style={{
-        color: "#00eaff",
+        // color: "#00eaff",
         fontSize: "1rem",
         marginBottom: "5px",
         display: "block",
@@ -171,7 +164,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
       Visa/Mastercard Volume (USD) *
     </label>
 
-    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+    <div className="lbl" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
       <input
         type="range"
         min="0"
@@ -180,11 +173,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
         name="visaMasterVolume"
         value={formData.visaMasterVolume}
         onChange={handleInput}
-        style={{
-          flex: 1,
-          accentColor: "#00eaff",
-          cursor: "pointer",
-        }}
+        
       />
 
       <input
@@ -209,7 +198,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
   </div>
 
   {/* other cards */}
-  <div style={{ width: "95%" }}>
+  <div className="lbl" style={{ width: "95%" }}>
     <label
       style={{
         color: "#00eaff",
@@ -231,11 +220,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
         name="otherCardVolume"
         value={formData.otherCardVolume}
         onChange={handleInput}
-        style={{
-          flex: 1,
-          accentColor: "#00eaff",
-          cursor: "pointer",
-        }}
+        
       />
 
       <input
@@ -345,10 +330,12 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
         onPointerOver={(e) => {
           e.target.style.background = "rgba(0,255,255,0.25)";
           e.target.style.boxShadow = "0 0 25px rgba(0,255,255,0.55)";
+          e.target.style.borderBottom= "4px solid #D7B750 ";
         }}
         onPointerOut={(e) => {
           e.target.style.background = "rgba(0,15,25,1)";
           e.target.style.boxShadow = "0 0 18px rgba(0,255,255,0.35)";
+          e.target.style.borderBottom= "4px solid #00eaff";
         }}
       >
         Calculate
