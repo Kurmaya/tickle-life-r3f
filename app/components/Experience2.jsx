@@ -55,17 +55,7 @@ export const Experience2 = ({triggerExplosion,active,...props}) => {
 
     return () => tl.kill();
   }, [camera]);
-//hide calculator
-// document.querySelector('.form').classList.remove('active');
-// document.querySelector('#scroll').style.color='black';
-  // hide initial DOM elements
-  // const list = ['heading1', 'heading2', 'rates'];
-  // useEffect(() => {
-  //   list.forEach(i => {
-  //     const el = document.getElementById(i);
-  //     if (el) el.style.visibility = 'hidden';
-  //   });
-  // }, []);
+
 
   // listen to mouse movement
   useEffect(() => {

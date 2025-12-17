@@ -96,7 +96,7 @@ if(isHeart){
   }, [])
 
   // 🌎 Environment map 
-   const envMap2 = useTexture({ files: "./textures/film.jpg" })
+   const envMap2 = useTexture({ files: "./textures/film-opt.jpg" })
  useEffect(() => {
      if (!group.current) return
  
