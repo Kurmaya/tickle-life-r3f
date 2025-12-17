@@ -1,6 +1,7 @@
 "use client";
 import './globals.css'
 import './style.css'
+import './coin.css'
 import { Bebas_Neue, IBM_Plex_Sans, Saira_Condensed, Oxanium } from 'next/font/google'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -56,7 +57,7 @@ const handleClick=()=>{
       </Suspense>
         </Canvas>
       </div>
-      {/* <Header active={active} onToggle={handleClick}/> */}
+      
       {(pathname === "/" && <><HeroText active={active} triggerExplosion={handleExplosion}/> <TabletForm triggerExplosion={triggerExplosion} /></>)}
 
           {children}

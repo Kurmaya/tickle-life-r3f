@@ -22,7 +22,7 @@ const HeartFac = ({triggerExplosion,active,trigger,...props}) =>{
   const aMap = useTexture("/textures/alphamap.jpg")
   const envMap2 = useTexture({ files: "./textures/film.jpg" })
   const { camera } = useThree()
-  const { nodes, animations } = useGLTF("./models/heartexport.opt.glb")
+  const { nodes, animations } = useGLTF("./models/heartexport.glb")
   const { actions } = useAnimations(animations, group)
 // 🔹 Responsive scaling & positioning
 const { size } = useThree()
@@ -436,5 +436,5 @@ if(isHeart){
   )
 }
 
-useGLTF.preload('/models/heartexport.opt.glb')
+useGLTF.preload('/models/heartexport.glb')
 export default HeartFac;

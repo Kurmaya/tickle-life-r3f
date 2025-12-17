@@ -9,6 +9,7 @@ html,body,#root{
  
 }
 
+
 /* Main{
   cursor: none;
 } */
@@ -199,59 +200,6 @@ cursor:pointer;
 
 .f-button:active {
   transform: translateY(1px);
-}
-.coin-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 9999;
-    transform: translate(-50%, -50%);
-}
-
-.coin {
-  position: relative;
-  width: 38px;
-  height: 38px;
-  transform-style: preserve-3d;
-  
-}
-
-.face {
-  position: absolute;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: radial-gradient(circle at top, #D7B750, #b8860b);
-  display: grid;
-  place-items: center;
-  font-weight: 900;
-  color: #2b2100;
-  font-size: 14px;
-  backface-visibility: hidden;
-  animation: glow 1.5s ease infinite alternate;
-}
-
-.face.front {
-  transform: translateZ(4px);
-}
-
-.face.back {
-  transform: rotateY(180deg) translateZ(4px);
-}
-
-.edge {
-  position: absolute;
-  inset: 5px;
-  border-radius: 50%;
-  background: linear-gradient(
-    to right,
-    #7a5c00,
-    #d4af37,
-    #7a5c00
-  );
-  transform: rotateY(180deg);
-  
 }
 
 

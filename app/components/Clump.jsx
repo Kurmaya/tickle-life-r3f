@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 const responsiveScale = useMemo(() => {
   if (size.width < 500) return 1.2     // Mobile portrait
   if (size.width < 900) return 1.4     // Tablets
-  return 2.1                           // Desktop default (your original)
+  return 2.1                           // Desktop default
 }, [size])
   // ✅ Store coin metadata
   const coins = useMemo(() => [], []);
@@ -116,24 +116,13 @@ const responsiveScale = useMemo(() => {
     const t = timeline.current;
     const progress = t.progress();
  const offset = scroll.offset;
-// mation.play()
-    // Calculate progress relative to 2nd page
-    // (0.5 → 1 range for Page 2)
-  // const scrollProgress = THREE.MathUtils.clamp((offset - 0.05) / 0.05, 0, 1);
+
     if (timeline.current) {
       timeline.current.progress(offset);
     }
-    // if (scroll.offset > 0.7 && progress === 0 && !t.isActive()) {
-    //   t.timeScale(1.1)
-    //   t.play(); // 💥 Explosion
-    // }
-
-    // if (scroll.offset < 0.7 && progress > 0 && !t.isActive()) {
-    //   t.timeScale(4)
-    //   t.reverse(); // 💫 Re-form
-    // }
+  
   });
-  // ✅ Automatically render all meshes from the GLTF
+
   return (
        <group {...props} ref={group} rotation={[0, Math.PI * 0.4, 0]} dispose={null} scale={responsiveScale} >
       {Object.entries(nodes).map(([key, node]) => {

@@ -6,25 +6,15 @@
   import { useEffect, useMemo, useRef,useState } from "react";
   import { extend, useFrame, useThree } from "@react-three/fiber";
 import DustParticles from "./Dust";
-import { BlendFunction, Resizer, KernelSize,GlitchMode} from "postprocessing";
-// import {Clump2} from "./HeartFacGsap";
 import Clump2 from "./Clump";
-import CubeWithEquirectMap from "./CubeTex";
 import GridTop from "./GridFloor";
 import gsap  from "gsap";
-import HeartFac from "./HeartFac";
-import HeartFac2 from "./HeartScroll";
 import Mat from "./MatPodium";
 import CurvedPlane from "./FadingCylinder";
 import FuturisticRing from "./FutureRing";
 import Bitcoin from "./Bitcoin";
 import WaveShape from "./Wave";
 import OrbitCoin from "./OrbitCoin";
-import { ShaderPass } from "three/examples/jsm/Addons.js";
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
-
-import { Pencil } from "./Pencil";
-import { Pencil2 } from "./Pencil2";
 import { Fluid } from "@whatisjery/react-fluid-distortion";
 import HeartScroll from "./HeartScroll";
 
@@ -145,9 +135,9 @@ useEffect(() => {
     onHeartClick();      // parent state update
   }} trigger={trigger} renderOrder={0}/>
        
-        <Clump2 position={[0,3.4,0]} scale={1.9}/>
        
         </Float>
+        <Clump2 position={[0,3.4,0]} scale={1.9}/>
      
       
        <EffectComposer multisampling={0}>  {/* multisampling 0 = faster */}
