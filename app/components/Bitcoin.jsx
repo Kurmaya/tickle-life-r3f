@@ -20,8 +20,8 @@ const Bitcoin = ({ active, ...props }) => {
   const { radius, scale } = useMemo(() => {
     if (typeof window === "undefined") return { radius: 4.5, scale: 2 };
 
-    if (window.innerWidth < 480) return { radius: 2.3, scale: 1.5 };
     if (window.innerWidth < 769) return { radius: 3.5, scale: 2 };
+    if (window.innerWidth < 480) return { radius: 2.8, scale: 1.5 };
 
     return { radius: 4.5, scale: 2 };
   }, []);

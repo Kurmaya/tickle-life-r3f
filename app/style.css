@@ -83,12 +83,12 @@ p{
     pointer-events: none;
     scale: 0;
     width: 75%!important;
-    height: 70%;
+    height: 72%;
      padding: 1rem;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
         gap: 14px;
         box-sizing: border-box;
@@ -97,9 +97,8 @@ p{
         box-shadow:
           0 0 25px rgba(0,255,255,0.25), inset 0 0 15px rgba(0,255,255,0.15);
         color: #ffffff;
-        /* font-family: "Roboto, sans-serif"; */
         position:absolute;
-        top:18%;
+        top:15%;
         left:50%;
         transform:translateX(-50%);
       }
@@ -110,9 +109,9 @@ p{
 }
 .form p{
   width: 95%;
-  font-size: 1rem;
+  font-size: 0.8rem;
   
-  margin-top:-5px;
+  margin-top:10px;
 }
 .row input,.form input{
     width: 90%;
@@ -126,6 +125,7 @@ input[type='range'],.futuristic-tablet input[type='range']{
 .lbl label{
   /* color: red!important; */
   color:#00eaff!important;
+  font-size:.9rem!important;
 }
 .lbl:hover input[type='range']{
   animation: glow3 1.5s ease infinite alternate;
@@ -134,9 +134,7 @@ input[type='range'],.futuristic-tablet input[type='range']{
   accent-color: #26f4ff!important;
   color:red!important;
 }
-input[type='range']:hover{
-  color:red;
-}
+
 .form select:hover{
   animation: glow2 1.5s ease infinite alternate;
   border-bottom: 4px solid #D7B750 !important;
@@ -165,18 +163,24 @@ input[type='range']:hover{
   color: #88ffffaa;
 }
 
-.futuristic-tablet input:focus {
+.futuristic-tablet input:focus,.futuristic-tablet input:focus .futuristic-tablet input[type='range'] {
   background: rgba(0, 30, 32, 0.9);
   border-color: #00eaff;
   box-shadow: 0 0 15px #00eaffaa, 0 0 6px #00f2ff inset;
-  accent-color: #00f2ff!important;
+  accent-color: #d7b750!important;
+  accent-color:#D7b750!important;
+  animation: glow 1.5s ease infinite alternate;
 }
+.form input[type="number"]{
+  width: 85px!important;
+}
+
 .futuristic-tablet input[type='range']:hover {
 border-color: #bfff00!important;
 background: rgba(0, 30, 32, 0.9);
 box-shadow: 0 0 15px #00eaffaa, 0 0 6px #00f2ff inset;
 cursor:pointer;
-
+accent-color:#D7b750!important;
 }
 /* 🔹 Button */
 .f-button {
@@ -428,6 +432,7 @@ nav{
   }
   .form{
     height: auto!important;
+    top:20%!important;
   }
   #rates {
     top: 85% !important;

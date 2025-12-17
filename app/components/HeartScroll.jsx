@@ -213,7 +213,7 @@ console.log(actions);
             morphTargetDictionary={nodes.HEART_.morphTargetDictionary}
             morphTargetInfluences={nodes.HEART_.morphTargetInfluences}
             position={[-0.352, 0.887, 0.122]}
-            scale={1.05}
+            // scale={1.05}
           />
           <mesh
             name="MAIN__cell"

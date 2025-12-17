@@ -13,7 +13,7 @@
     place-items: center;
     }
     .coin-cursor .container {
-    transform: scale(0.32); /* tuned for 40px radius */
+    transform: scale(0.24); /* tuned for 40px radius */
     transform-origin: center;
     }
     /* Root resets */
@@ -53,7 +53,7 @@
 
 }
     /* Front/back faces */
-    .face {
+    /* .face {
     position: absolute;
     left: 0;
     top: 0;
@@ -62,7 +62,7 @@
     border-radius: 50%;
     backface-visibility: hidden;
     background: var(--face);
-    }
+    } */
 
     /* Front face */
     .face.front {
@@ -98,29 +98,41 @@
     /* Big currency symbol */
     .symbol {
     position: absolute;
-    color: var(--sign);
+    color: var(--circle);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 5em;
     font-family: sans-serif;
+    font-weight: bold;
+    text-shadow: 3px 3px 5px #6f5200;
+    /* filter: drop-shadow(2px -2px 1px #c9a227); */
+      background: radial-gradient(
+    circle at var(--lightX) var(--lightY),
+    var(--slide),
+    var(--sign)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color:var(--circle);
     }
+    
 
     /* Inner circle detail */
     .circle {
     border-radius: 50%;
-    border: 5px solid #6f5200;
+    border: 5px solid var(--circle);
     width: 9.5rem;
     height: 9.5rem;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    /* filter: drop-shadow(2px 2px 5px var(--circle)); */
     }
 
     /* Edge slices for thickness */
     .side {
-    width: 0.8em;
+    width: 1em;
     height: 1.61em;
     background: var(--side);
     position: absolute;

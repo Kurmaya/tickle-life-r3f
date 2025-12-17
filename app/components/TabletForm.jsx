@@ -75,7 +75,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
 
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
       <input 
-      autoFocus
+      autoFocus={true}
         type="range"
         min="0"
         max="10000"
