@@ -27,7 +27,7 @@ import HeartScroll from "./HeartScroll";
 
 
 
-  export const Experience = ({ triggerExplosion,active,onHeartClick }) => {
+  export const Experience = ({ isLoaded,triggerExplosion,active,onHeartClick }) => {
     const scroll = useScroll();
     document.querySelector('#scroll').style.color='white';
     const list = ['heading1', 'heading2', 'rates', 'scroll'];
@@ -43,7 +43,7 @@ const { scene,camera } = useThree();
 function trig(){
   
   setTrigger((prev)=> !prev)
-  console.log(trigger)
+  // console.log(trigger)
 }
 
   const dir = useRef();
@@ -51,35 +51,28 @@ function trig(){
   
 // load animation
 useEffect(() => {
-  // Set initial state
-  const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
-  tl.set(camera.position, { x: 25, y: 30, z: -58 });
+  if (!isLoaded) return; // ⛔ WAIT until loader is gone
 
-  
-  // Create a timeline 
-  
+  const tl = gsap.timeline({ defaults: { ease: "power2.out" } })
+
+  tl.set(camera.position, { x: 25, y: 30, z: -58 })
+
   tl.to(camera.position, {
     x: 40,
     y: -3,
     z: 3.5,
     duration: 2.5,
-      onUpdate: () => camera.lookAt(0, 0, 0),
-      immediateRender: false,
-    })
-   
-    tl.to("#heading1", { opacity: 1, duration: 1 })
-    tl.to("#heading2", { opacity: 1, duration: 1 }, '<')
-    tl.to('#rates',{opacity:1,duration:1},'<')
-    tl.to('#scroll',{opacity:1,duration:1},'<')
-   
+    onUpdate: () => camera.lookAt(0, 0, 0),
+    immediateRender: false,
+  })
+    .to("#heading1", { opacity: 1, duration: 1 })
+    .to("#heading2", { opacity: 1, duration: 1 }, "<")
+    .to("#rates", { opacity: 1, duration: 1 }, "<")
+    .to("#scroll", { opacity: 1, duration: 1 }, "<")
 
-    
-    
-    tl.play();
-    
-    // Cleanup on unmount
-    return () => tl.kill();
-  }, [camera]);
+  return () => tl.kill()
+}, [camera, isLoaded])
+
 
   
 

@@ -13,7 +13,7 @@ const HeartScroll = ({triggerExplosion,active,trigger,...props}) => {
   
  const group = useRef();
   const { camera } = useThree();
-  const scroll = useScroll();
+  
   const timeline = useRef();
   const [clicked, setClicked] = useState(false)
   const { nodes, materials, animations } = useGLTF("./models/heart-med.glb");
@@ -38,6 +38,12 @@ const responsiveRotation = useMemo(() => {
   if (size.width < 500) return [Math.PI * 1.9, Math.PI * 0.2, 0] // reduce horizontal tilt
   return [Math.PI*1.9, Math.PI*0.4, 0]
 }, [size])
+let scroll;
+try {
+  scroll = useScroll();
+} catch {
+  scroll = null;
+}
  //  Setup timeline for explosion
   useEffect(() => {
     if (!group.current) return
@@ -132,7 +138,7 @@ useEffect(() => {
 
 const handleClick = (target=0.9) => {
 
-    triggerExplosion=true;
+    
     setClicked(true);
     const el = scroll.el // 👈 THIS is the scroll container
 
@@ -156,16 +162,18 @@ useEffect(() => {
 
   // 🧭 Scroll-linked timeline progress
   useFrame(() => {
-    if (!group.current || !scroll) return;
+  if (!group.current) return;
+  if (!scroll || !scroll.el) return;
+  if (!timeline.current) return;
 
-  const offset = scroll.offset;
-  const scrollProgress = THREE.MathUtils.lerp(0, 1, offset);
+  const offset = scroll.offset ?? 0;
 
-  timeline.current?.progress(scrollProgress);
- if (timeline.current.progress() >= 0.8) {
-    document.querySelector('.form')?.classList.add('active');
-  } else {
-    document.querySelector('.form')?.classList.remove('active');
+  timeline.current.progress(offset);
+
+  // Form activation
+  const form = document.querySelector('.form');
+  if (form) {
+    form.classList.toggle('active', timeline.current.progress() >= 0.8);
   }
 
 
@@ -194,7 +202,7 @@ useEffect(() => {
         }
     });
   });
-console.log(actions);
+
  
   return (
       <group ref={group} {...props} dispose={null} scale={responsiveScale}
@@ -202,7 +210,9 @@ console.log(actions);
   rotation={responsiveRotation} onClick={(e) => {
       e.stopPropagation();
       handleClick(1.0);
-    }}>
+    }}
+    
+    >
       <group name="Scene">
          <mesh
             name="HEART_"
@@ -213,6 +223,14 @@ console.log(actions);
             morphTargetDictionary={nodes.HEART_.morphTargetDictionary}
             morphTargetInfluences={nodes.HEART_.morphTargetInfluences}
             position={[-0.352, 0.887, 0.122]}
+            onPointerEnter={(e) => {
+    e.stopPropagation();
+    document.body.style.cursor = 'pointer';
+  }}
+  onPointerLeave={(e) => {
+    e.stopPropagation();
+    document.body.style.cursor = 'none';
+  }}
             // scale={1.05}
           />
           <mesh

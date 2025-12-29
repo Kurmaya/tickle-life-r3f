@@ -5,7 +5,14 @@ const oxanium = Oxanium({
   subsets: ["latin"],
   weight: ['500'],
 });
-
+const Tooltip = ({ text }) => {
+  return (
+    <span className="tooltip-wrapper">
+      {/* ⓘ */}
+      <span className="tooltip">{text}</span>
+    </span>
+  );
+};
 
 const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
     const [formData, setFormData] = useState({
@@ -48,7 +55,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
       
     >
       
-  
+  <Tooltip text="Use the Slider or the input fields to select an amount  " />
 
       {/* INPUT SET */}
       <div
@@ -61,7 +68,9 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
           gap: "10px",
         }}
       >
+        
          <div className="lbl" style={{ width: "95%" }}>
+          
     <label
       style={{
         color: "#00eaff",
@@ -70,7 +79,9 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
         display: "block",
       }}
     >
+      
       Total Monthly Income (USD) *
+      
     </label>
 
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -104,6 +115,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
           outline: "none",
         }}
       />
+      
     </div>
   </div>
     <div className="lbl" style={{ width: "95%" }}>
@@ -148,6 +160,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
           outline: "none",
         }}
       />
+    {/* <Tooltip text="Use the Slider to select or use the input fields an amount  " /> */}
     </div>
   </div>
 
@@ -194,6 +207,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
           outline: "none",
         }}
       />
+      {/* <Tooltip text="Use the Slider to select or use the input fields an amount  " /> */}
     </div>
   </div>
 
@@ -241,6 +255,7 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
           outline: "none",
         }}
       />
+      {/* <Tooltip text="Use the Slider to select or use the input fields an amount  " /> */}
     </div>
   </div>
 
@@ -340,7 +355,9 @@ const TabletForm = ({ trigger, triggerExplosion, formRef }) => {
       >
         Calculate
       </button>
-<p className={oxanium.className}>These rates are estimates for low-risk businesses. If your business involves higher risk, please reach out and we will provide a tailored rate based on your risk level and overall business needs.</p>      
+<p className={oxanium.className}>These rates are estimates for low-risk businesses. If your business involves higher risk, please reach out and we will provide a tailored rate based on your risk level and overall business needs.
+  </p>      
+  {/* <Tooltip text="Total gross revenue your business generates per month." /> */}
     </div>
   
   );

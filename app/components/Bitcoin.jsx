@@ -10,7 +10,7 @@ const Bitcoin = ({ active, ...props }) => {
   const coinRef = useRef();
   const tl = useRef();
 
-  const env = useEnvironment({ files: "./textures/gold.jpg" });
+  const env = useEnvironment({ files: "./textures/gold2.jpg" });
   const scroll = useScroll();
 
   const fadeRef = useRef(0); // 0 = visible, 1 = fully faded
@@ -28,14 +28,7 @@ const Bitcoin = ({ active, ...props }) => {
 
   /* ---------------- Material Setup ---------------- */
 
-  useEffect(() => {
-    if (!coinRef.current) return;
-
-    const mat = coinRef.current.material;
-    mat.envMap = env;
-    mat.transparent = true;
-    mat.opacity = 1;
-  }, [env]);
+  
 
   /* ---------------- Orbit + Spin Timeline ---------------- */
 

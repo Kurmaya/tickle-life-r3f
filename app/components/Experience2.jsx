@@ -19,9 +19,9 @@ import { ShaderPass } from "three/examples/jsm/Addons.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { Pencil } from "./Pencil";
 import WaveShape2 from "./WaveShape2";
-import HeartScroll from "./HeartScroll";
 
-export const Experience2 = ({triggerExplosion,active,...props}) => {
+
+export const Experience2 = ({isLoaded,triggerExplosion,active,...props}) => {
   const [trigger, setTrigger] = useState(false);
   const { scene, camera } = useThree();
 
@@ -41,6 +41,7 @@ export const Experience2 = ({triggerExplosion,active,...props}) => {
   }
 
   useEffect(() => {
+    if(!isLoaded) return
     const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
     tl.set(camera.position, { x: 25, y: 30, z: -58 });
     tl.to(camera.position, {
@@ -54,7 +55,7 @@ export const Experience2 = ({triggerExplosion,active,...props}) => {
     tl.play();
 
     return () => tl.kill();
-  }, [camera]);
+  }, [camera,isLoaded]);
 
 
   // listen to mouse movement
@@ -94,8 +95,8 @@ console.log('fluidRef:', fluidRef.current);
       
       <WaveShape2 position={[-45,10,20]} thickness={0.3} color={'#D7B750'} rotation={[0,Math.PI*0.5,0]} scale={8} animate={false} triggerExplosion={triggerExplosion} trigger={trigger}/>
       <Float floatIntensity={0.5} rotationIntensity={0.25}>
-        {/* <HeartFac active={active} /> */}
-        <HeartScroll active={active} />
+        <HeartFac active={active} />
+        {/* <HeartScroll active={active} /> */}
       </Float>
       <FuturisticRing2 position={[0,-8.68,0]} glowIntensity={0.1} color={'#D7B750'} haloSpread={0} rippleCount={0.02} rippleSpeed={active ? 0.1 : 0.5} />
       <spotLight ref={spot} color={'yellow'} position={[4,22,8]} intensity={50} angle={0.6} decay={1.2} distance={18} penumbra={0.7} />

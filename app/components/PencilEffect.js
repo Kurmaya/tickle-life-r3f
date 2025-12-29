@@ -69,6 +69,7 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
     // --------------------------------------------------
     vec3 paper = vec3(0.9647, 0.9098, 0.7216);
     finalColor = mix(paper, finalColor, 0.32);  // 92% sketch, 8% paper tint
+    
 
     outputColor = vec4(finalColor, 1.0);
 }
