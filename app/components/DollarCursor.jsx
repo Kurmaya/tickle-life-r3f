@@ -5,6 +5,7 @@ import gsap from 'gsap'
 export default function CoinCursor() {
   const cursorRef = useRef(null)
   const coinRef = useRef(null)
+  const tickerRef = useRef(null)
 
   useEffect(() => {
     const cursor = cursorRef.current
@@ -31,27 +32,86 @@ export default function CoinCursor() {
     const FRICTION = 0.88
     const RETURN_FORCE = 0.06
 
+    /* ---------------- POINTER TARGETS ---------------- */
+
+    const pointerFadeSelector = `
+      a, button, input, textarea, select,
+      [role="button"],
+      p, span, li, h1, h2, h3, h4, h5, h6
+    `
+
+    /* ---------------- MOUSE MOVE ---------------- */
+
     const move = (e) => {
       mouseX = e.clientX
       mouseY = e.clientY
     }
 
+    /* ---------------- SPIN ---------------- */
+
     const startSpin = () => coin.classList.add('active')
     const stopSpin = () => coin.classList.remove('active')
+
+    /* ---------------- FADE ---------------- */
+
+    const fadeOut = (e) => {
+      const t = e.target
+
+      if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') {
+        document.body.style.cursor = 'text'
+      } else if (t.closest('a, button, [role="button"]')) {
+        document.body.style.cursor = 'pointer'
+      } else {
+        document.body.style.cursor = 'default'
+      }
+
+      gsap.to(cursor, {
+        autoAlpha: 0,
+        scale: 0.85,
+        duration: 0.2,
+        ease: 'power2.out',
+        overwrite: true,
+      })
+    }
+
+    const fadeIn = () => {
+      document.body.style.cursor = 'none'
+
+      gsap.to(cursor, {
+        autoAlpha: 1,
+        scale: 1,
+        duration: 0.2,
+        ease: 'power2.out',
+        overwrite: true,
+      })
+    }
+
+    const handlePointerOver = (e) => {
+      if (e.target.closest(pointerFadeSelector)) fadeOut(e)
+    }
+
+    const handlePointerOut = (e) => {
+      if (e.target.closest(pointerFadeSelector)) fadeIn()
+    }
+
+    /* ---------------- EVENTS ---------------- */
 
     window.addEventListener('mousemove', move)
     window.addEventListener('mousedown', startSpin)
     window.addEventListener('mouseup', stopSpin)
 
+    document.addEventListener('pointerover', handlePointerOver)
+    document.addEventListener('pointerout', handlePointerOut)
+
     gsap.set(cursor, { xPercent: -50, yPercent: -50, force3D: true })
 
-    gsap.ticker.add(() => {
-      // Smooth follow
+    /* ---------------- GSAP TICKER ---------------- */
+
+    tickerRef.current = () => {
       x += (mouseX - x) * FOLLOW
       y += (mouseY - y) * FOLLOW
-      gsap.set(cursor, { x, y, xPercent: -50, yPercent: -50 })
+      gsap.set(cursor, { x, y })
 
-      // Mouse velocity → rotation
       velX = mouseX - lastX
       velY = mouseY - lastY
       lastX = mouseX
@@ -59,27 +119,39 @@ export default function CoinCursor() {
 
       rotY += velX * ROTATE_STRENGTH
       rotX -= velY * ROTATE_STRENGTH
+
       rotX *= FRICTION
       rotY *= FRICTION
+
       rotX += (0 - rotX) * RETURN_FORCE
       rotY += (0 - rotY) * RETURN_FORCE
 
       gsap.set(coin, { rotateX: rotX, rotateY: rotY })
 
-      // Dynamic shine
       const rect = coin.getBoundingClientRect()
       const relX = ((mouseX - rect.left) / rect.width) * 100
       const relY = ((mouseY - rect.top) / rect.height) * 100
       coin.style.setProperty('--lightX', `${relX}%`)
       coin.style.setProperty('--lightY', `${relY}%`)
-    })
+    }
+
+    gsap.ticker.add(tickerRef.current)
+
+    /* ---------------- CLEANUP ---------------- */
 
     return () => {
       document.body.style.cursor = 'auto'
+
       window.removeEventListener('mousemove', move)
       window.removeEventListener('mousedown', startSpin)
       window.removeEventListener('mouseup', stopSpin)
-      gsap.ticker.remove(() => {})
+
+      document.removeEventListener('pointerover', handlePointerOver)
+      document.removeEventListener('pointerout', handlePointerOut)
+
+      if (tickerRef.current) {
+        gsap.ticker.remove(tickerRef.current)
+      }
     }
   }, [])
 

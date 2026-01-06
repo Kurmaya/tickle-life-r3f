@@ -45,9 +45,9 @@ useEffect(() => {
   <LoadingScreen onFinish={() => setIsLoaded(true)} />
 )}
 
+   <DollarCursor />
         <Navbar />
         <main className="flex-grow">
-   <DollarCursor />
     <div className="w-full h-screen">
         <Canvas id={'main-canvas'} shadows camera={{ position: [25, 30, -58], fov: 50 }} dpr={[1,1.5]} style={{zIndex: pathname === '/'? 'auto':'-3'}}>
       <Suspense fallback={null} >

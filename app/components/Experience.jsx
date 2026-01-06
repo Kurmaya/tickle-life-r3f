@@ -126,7 +126,9 @@ useEffect(() => {
          onClick={() => {
     trig();              // internal
     onHeartClick();      // parent state update
-  }} trigger={trigger} renderOrder={0}/>
+  }} trigger={trigger} renderOrder={0}
+  
+  />
        
        
         </Float>

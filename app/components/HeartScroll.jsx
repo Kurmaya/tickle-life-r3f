@@ -223,14 +223,14 @@ useEffect(() => {
             morphTargetDictionary={nodes.HEART_.morphTargetDictionary}
             morphTargetInfluences={nodes.HEART_.morphTargetInfluences}
             position={[-0.352, 0.887, 0.122]}
-            onPointerEnter={(e) => {
-    e.stopPropagation();
-    document.body.style.cursor = 'pointer';
-  }}
-  onPointerLeave={(e) => {
-    e.stopPropagation();
-    document.body.style.cursor = 'none';
-  }}
+  //           onPointerEnter={(e) => {
+  //   e.stopPropagation();
+  //   document.body.style.cursor = 'pointer';
+  // }}
+  // onPointerLeave={(e) => {
+  //   e.stopPropagation();
+  //   document.body.style.cursor = 'none';
+  // }}
             // scale={1.05}
           />
           <mesh

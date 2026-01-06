@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     pointer-events: none;
-    z-index: 98;
+    z-index: 999;
 
     /* 40px radius → 80px diameter */
     width: 29px;
@@ -12,6 +12,7 @@
     display: grid;
     place-items: center;
     }
+    
     .coin-cursor .container {
     transform: scale(0.24); /* tuned for 40px radius */
     transform-origin: center;
